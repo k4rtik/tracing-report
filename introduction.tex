@@ -1,0 +1,30 @@
+\chapter{Introduction}
+
+\section{Background}
+
+\subsection{Serverless Computing or Function as a Service (FaaS)}
+Serverless computing is a relatively recent cloud computing model in which a cloud provider fully manages execution of user specified functions without the user having to worry about provisioning containers (and earlier virtual machines (VM)) for their use. One of the primary benefits apart from abstration is in terms of cost as the providers usually only charge for the resources used during the execution of a request instead of hourly or per-VM billing.
+
+The programming model is that the unit of execution is a funtion which can be invoked through an HTTP API. A more general model of event-driven programming is also supported in that one can schedule actions that can trigger periodically or by explicit request through HTTP.
+
+Most major cloud service providers have introduced their own serverless offerings, such as Amazon's AWS Lambda, Google's Cloud Functions, IBM's OpenWhisk (or Apache OpenWhisk\cite{web:wsk}), and Microsoft's Azure Functions.
+
+However, debugging or tracing one's application in this architecture remains a difficulty as users have little to no visibility into the underlying software stack. Even if one can replicate an open source offering such as OpenWhisk in their local environment, tracing across diverse system components in a distributed setting is a difficult problem as we discuss in the next section.
+
+\subsection{Why is Tracing Distributed Systems hard?}
+
+
+\begin{itemize}
+  \item Towards a Tracing Plane for Distributed Systems\cite{Fonseca16}
+  \item A Layered Architecture for Distributed System Instrumentation\cite{Mace17}
+  \item X-trace: A Pervasive Network Tracing Framework\cite{Fonseca:2007:XPN:1973430.1973450}
+  \item Pivot Tracing: Dynamic Causal Monitoring for Distributed Systems\cite{Mace:2015:PTD:2815400.2815415}
+  \item End-to-End Tracing: Adoption and Use Cases\cite{mace2017survey}
+  \item Conflict-free Replicated Data Types\cite{Shapiro:2011:CRD:2050613.2050642}
+  \item A comprehensive study of Convergent and Commutative Replicated Data Types\cite{shapiro:inria-00555588}
+  \item Apache OpenWhisk\cite{web:wsk}
+  \item Brown Tracing Framework\cite{web:btf}
+  \item Zipkin
+\end{itemize}
+
+\section{Motivation}
