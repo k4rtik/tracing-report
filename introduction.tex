@@ -14,7 +14,7 @@ However, debugging or tracing one's application in this architecture remains a d
 \subsection{Why is Tracing Distributed Systems hard?}\label{sec:challenge}
 Distributed systems are usually built by putting together different components performing different tasks such as handling HTTP requests, authentication, authorization, persistence, compute, request queing, service discovery, management, etc. Making these systems work together as a whole in itself is challenging as complexity is spread across many different components.
 
-When it comes to tracing these systems, a comprehensive solution needs to include instrumentation across all code paths and component boundaries. This could best be done when the individual system is being written but in most cases tracing is added as an afterthought or to work together with one's own distributed tracing solution.
+When it comes to tracing these systems, a comprehensive solution needs to include instrumentation across all code paths and component boundaries. This could best be done during development time when the individual system is being written but in most cases tracing is added as an afterthought or to work together with one's own distributed tracing solution.
 
 Moreover, end-to-end tracing requires participation of each and every system component that is part of a distributed service architecture. Leaving behind a system means lack of knowledge about the execution of a request or worse misinformation as one request's trace could be confused with another. This is difficult because usually each of these systems is built in a different language.
 
