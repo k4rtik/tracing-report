@@ -1,0 +1,7 @@
+\chapter{Conclusion and Future Work}
+
+I have learned a good deal about the new serverless architecture of computation and specifically, OpenWhisk, during the course of this project. Further, I have learned that distributed tracing is hard on its own even when each system component is locally available; serverless architecture adds another layer of difficulty with the cloud abstraction. Generic opaque baggage contexts proposed in Tracing Plane work can help with the problem of distributed instrumentation for any system. They still require source code modification for each component, but it needs to be done only once. Tracing plane abstraction helps control complexity related to different concerns of developers and hiding subtle details aboout metadata propagation such as merges and joins across thread, application and machine boundaries. Execution-flow scoped variables built on top of opaque baggage contexts allow different kinds of tracing tools to be implemented much more easily.
+
+In the beginning of the project, I also learned about Conflict-free Replicated Data Types (CRDTs)\cite{Shapiro:2011:CRD:2050613.2050642} which are used in the tracing plane to implement tracing plane BDL (Baggage Definition Language) data types such as flags, counters, sets and maps.
+
+In future, we would like to port the current tracing plane implementation to support many more languages and runtimes such as Go, Erlang, C/C++ and Rust. We would also like to expand the BDL data type library with more existing CRDTs\cite{shapiro:inria-00555588}.
