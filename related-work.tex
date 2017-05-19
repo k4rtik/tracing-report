@@ -1,0 +1,9 @@
+\chapter{Related Work}
+
+There is an active ongoing discussion on GitHub\cite{web:ghissue} about adding distributed tracing support to OpenWhisk. Other proposals on the table are:
+\begin{itemize}
+  \item Zipkin\cite{web:zipkin}, which is widely deployed in industry\cite{mace2017survey}, but is focused on collecting timing data; tracing plane, on the other hand, provides generic baggage contexts which can support any other meta data as well, and is flexible enough that Zipkin can be implemented over it.
+  \item Pinpoint\cite{web:pinpoint}, also based on Dapper, which does not require any code changes as it uses bytecode instrumentation for JVM components. But it is also a limitation because it does not provide any visibility into the rest of the system. Moreover, Pinpoint can be used along with either of Zipkin or Tracing Plane based instrumentation, so it is not an either-or choice.
+\end{itemize}
+
+Further, there is an argument whether pervasive tracing is really needed as OpenWhisk has its own mature logging implementation. But logging does not provide the same benefits as causal tracing because it can only provide correlation which can go bad because of reasons such as clock skew. Moreover, with logging disk I/O can become a bottleneck.
