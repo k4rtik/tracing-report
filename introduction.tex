@@ -12,19 +12,18 @@ Most major cloud service providers have introduced their own serverless offering
 However, debugging or tracing one's application in this architecture remains a difficulty as users have little to no visibility into the underlying software stack. Even if one can replicate an open source offering such as OpenWhisk in their local environment, tracing across diverse system components in a distributed setting is a difficult problem as we discuss in the next section.
 
 \subsection{Why is Tracing Distributed Systems hard?}
+Distributed systems are usually built by putting together different components performing different tasks such as handling HTTP requests, authentication, authorization, persistence, compute, request queing, service discovery, management, etc. Making these systems work together as a whole in itself is challenging as complexity is spread across many different components.
 
+When it comes to tracing these systems, a comprehensive solution needs to include instrumentation across all code paths and component boundaries. This could best be done when the individual system is being written but in most cases tracing is added as an afterthought or to work together with one's own distributed tracing solution.
 
-\begin{itemize}
-  \item Towards a Tracing Plane for Distributed Systems\cite{Fonseca16}
-  \item A Layered Architecture for Distributed System Instrumentation\cite{Mace17}
-  \item X-trace: A Pervasive Network Tracing Framework\cite{Fonseca:2007:XPN:1973430.1973450}
-  \item Pivot Tracing: Dynamic Causal Monitoring for Distributed Systems\cite{Mace:2015:PTD:2815400.2815415}
-  \item End-to-End Tracing: Adoption and Use Cases\cite{mace2017survey}
-  \item Conflict-free Replicated Data Types\cite{Shapiro:2011:CRD:2050613.2050642}
-  \item A comprehensive study of Convergent and Commutative Replicated Data Types\cite{shapiro:inria-00555588}
-  \item Apache OpenWhisk\cite{web:wsk}
-  \item Brown Tracing Framework\cite{web:btf}
-  \item Zipkin
-\end{itemize}
+Moreover, end-to-end tracing requires participation of each and every system component that is part of a distributed service architecture. Leaving behind a system means lack of knowledge about the execution of a request or worse misinformation as one request's trace could be confused with another. This is difficult because usually each of these systems is built in a different language.
+
+\subsection{Existing Solutions to Distributed Tracing}
+X-Trace\cite{Fonseca:2007:XPN:1973430.1973450} was one of the first cross-layer and cross-application end-to-end causal tracing frameworks. Dapper\cite{36356} is Google's production distributed systems tracing infrastructure that has conceptually similarities to X-Trace. The end-to-end metadata propagation technique was generalized by the introduction of a \emph{baggage} abstraction in Pivot Tracing\cite{Mace:2015:PTD:2815400.2815415}. Baggage can be thought of as a container that propagates metadata alongside a request across process and machine boundaries.
+
+Mace and Fonseca have recently proposed a layered Tracing Plane architecture\cite{Mace17}\cite{Fonseca16} for distributed tracing that provides generic baggage (or context) propagation and an abstraction called \emph{execution flow scoped variables} that allows different tracing tools to be built over a baggage layer exposed in this system. The core idea is that once a distributed system is instrumented with this system to include opaque baggage contexts, it is possible for them to support various tracing tools on them without any more change to the system. We believe this work is a step forward in supporting truly pervasive instrumentation for distributed systems and we utilize this system to instrument one serverless framework, OpenWhisk.
+
 
 \section{Motivation}
+
+The Tracing Plane architecture seems really promising but it is still necessary to modify source code of each system component to effectively use it. Moreover, the current implementation only supports JVM based languages like Java and Scala. With this work, we want to find out how difficult is it to instrument an existing distributed system with tracing plane abstractions and how much performance overhead does it incur.
