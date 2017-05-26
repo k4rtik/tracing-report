@@ -11,6 +11,6 @@ Consider the following part of the screenshot:
 ![X-Trace Partial Screenshot](part-shot.png)
 
 - The first 6 threads (horizontal bars) belong to the Controller process
-- The rest 5 threads (only two visible in the partial screenshot above) belong to the Invoker process
+- The rest 5 threads (only two visible in the partial screenshot above) belong to an invoker process (`invoker0`)
 - A span represents a method call in a thread and can consist of many events logged by X-Trace
-- ID of 2ea1 in the URL corresponds to the OpenWhisk transaction ID `#tid_11937` in the hovertext shown above for the authentication related log event recorded by the Controller process' thread 1 (`controller_Process-7_Thread-40`)
+- ID of 2ea1 in hex in the URL corresponds to the OpenWhisk transaction ID `#tid_11937` in the hovertext shown above for the authentication related log event recorded by the first thread of the Controller process (`Thread-Machine-controller_Process-7_Thread-40`)
